@@ -1,4 +1,4 @@
-package com.example.wanderlust.ui.extra1;
+package com.example.wanderlust.ui.settings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.wanderlust.R;
 
-public class Extra1Fragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
-    private Extra1ViewModel extra1ViewModel;
+    private SettingsViewModel settingsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        extra1ViewModel =
-                ViewModelProviders.of(this).get(Extra1ViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_extra1, container, false);
-        final TextView textView = root.findViewById(R.id.text_extra1);
-        extra1ViewModel.getText().observe(this, new Observer<String>() {
+        settingsViewModel =
+                ViewModelProviders.of(this).get(SettingsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_settings, container, false);
+        final TextView textView = root.findViewById(R.id.text_settings);
+        settingsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.wanderlust.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_bookmark"
+        android:name="com.example.wanderlust.ui.bookmark.BookmarkFragment"
+        android:label="@string/title_bookmark"
+        tools:layout="@layout/fragment_bookmark" />
 
     <fragment
         android:id="@+id/navigation_addnewpost"
@@ -23,15 +23,15 @@
         android:label="@string/title_addnewpost"
         tools:layout="@layout/fragment_addnewpost" />
     <fragment
-        android:id="@+id/navigation_extra1"
-        android:name="com.example.wanderlust.ui.extra1.Extra1Fragment"
-        android:label="@string/title_extra1"
-        tools:layout="@layout/fragment_extra1" />
+        android:id="@+id/navigation_maps"
+        android:name="com.example.wanderlust.ui.maps.MapsFragment"
+        android:label="@string/title_maps"
+        tools:layout="@layout/fragment_maps" />
 
     <fragment
-        android:id="@+id/navigation_extra2"
-        android:name="com.example.wanderlust.ui.extra2.Extra2Fragment"
-        android:label="@string/title_extra2"
-        tools:layout="@layout/fragment_extra2" />
+        android:id="@+id/navigation_settings"
+        android:name="com.example.wanderlust.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

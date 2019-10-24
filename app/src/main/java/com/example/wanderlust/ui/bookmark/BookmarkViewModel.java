@@ -1,16 +1,16 @@
-package com.example.wanderlust.ui.extra2;
+package com.example.wanderlust.ui.bookmark;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class Extra2ViewModel extends ViewModel {
+public class BookmarkViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public Extra2ViewModel() {
+    public BookmarkViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is extra2 fragment");
+        mText.setValue("This is bookmark fragment");
     }
 
     public LiveData<String> getText() {

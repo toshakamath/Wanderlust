@@ -7,22 +7,22 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_bookmark"
         android:icon="@drawable/ic_bookmark_border_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_bookmark" />
 
     <item
         android:id="@+id/navigation_addnewpost"
         android:icon="@drawable/ic_add_circle_outline_black_24dp"
         android:title="@string/title_addnewpost" />
     <item
-        android:id="@+id/navigation_extra1"
+        android:id="@+id/navigation_maps"
         android:icon="@drawable/ic_place_black_24dp"
-        android:title="@string/title_extra1" />
+        android:title="@string/title_maps" />
 
     <item
-        android:id="@+id/navigation_extra2"
+        android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_settings_black_24dp"
-        android:title="@string/title_extra2" />
+        android:title="@string/title_settings" />
 
 </menu>

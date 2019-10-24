@@ -1,16 +1,16 @@
-package com.example.wanderlust.ui.extra1;
+package com.example.wanderlust.ui.settings;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class Extra1ViewModel extends ViewModel {
+public class SettingsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public Extra1ViewModel() {
+    public SettingsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is extra1 fragment");
+        mText.setValue("This is settings fragment");
     }
 
     public LiveData<String> getText() {
