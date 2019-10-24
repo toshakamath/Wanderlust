@@ -12,9 +12,9 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_addnewpost"
         android:icon="@drawable/ic_add_circle_outline_black_24dp"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_addnewpost" />
     <item
         android:id="@+id/navigation_extra1"
         android:icon="@drawable/ic_place_black_24dp"

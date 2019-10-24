@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.wanderlust.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_addnewpost"
+        android:name="com.example.wanderlust.ui.addnewpost.AddNewPostFragment"
+        android:label="@string/title_addnewpost"
+        tools:layout="@layout/fragment_addnewpost" />
     <fragment
         android:id="@+id/navigation_extra1"
         android:name="com.example.wanderlust.ui.extra1.Extra1Fragment"

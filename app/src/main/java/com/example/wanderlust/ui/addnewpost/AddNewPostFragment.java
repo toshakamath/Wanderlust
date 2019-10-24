@@ -1,4 +1,4 @@
-package com.example.wanderlust.ui.notifications;
+package com.example.wanderlust.ui.addnewpost;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.wanderlust.R;
 
-public class NotificationsFragment extends Fragment {
+public class AddNewPostFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private AddNewPostViewModel addNewPostViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
+        addNewPostViewModel =
+                ViewModelProviders.of(this).get(AddNewPostViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_addnewpost, container, false);
+        final TextView textView = root.findViewById(R.id.text_addnewpost);
+        addNewPostViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
