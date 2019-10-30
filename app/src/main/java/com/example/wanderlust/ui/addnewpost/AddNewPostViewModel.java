@@ -4,13 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.wanderlust.DatabaseHelper.DbInstance;
 import com.example.wanderlust.Doa.BlogObject;
-import com.example.wanderlust.Repository.BlogRepository;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -22,6 +21,9 @@ public class AddNewPostViewModel extends ViewModel {
     private MutableLiveData<String> blogTitle;
     private MutableLiveData<String> blogText;
     private MutableLiveData<ArrayList<Bitmap>> blogImages;
+    private MutableLiveData<String> locationName;
+    private MutableLiveData<String> locationAddress;
+    private MutableLiveData<LatLng> locationLatLong;
     private ArrayList<byte[]> imageBlob;
     private MutableLiveData<Boolean> successFlag;
 
@@ -31,6 +33,9 @@ public class AddNewPostViewModel extends ViewModel {
         blogTitle = new MutableLiveData<>();
         blogText = new MutableLiveData<>();
         blogImages = new MutableLiveData<>();
+        locationName = new MutableLiveData<>();
+        locationAddress = new MutableLiveData<>();
+        locationLatLong = new MutableLiveData<>();
         successFlag = new MutableLiveData<>();
         successFlag.setValue(false);
     }
@@ -55,10 +60,25 @@ public class AddNewPostViewModel extends ViewModel {
         return successFlag;
     }
 
+    public MutableLiveData<String> getLocationName() {
+        return locationName;
+    }
+
+    public MutableLiveData<String> getLocationAddress() {
+        return locationAddress;
+    }
+
+    public MutableLiveData<LatLng> getLocationLatLong() {
+        return locationLatLong;
+    }
+
     public void clearData() {
         blogTitle.setValue("");
         blogText.setValue("");
         blogImages.setValue(null);
+        locationAddress.setValue("");
+        locationAddress.setValue("");
+        locationLatLong.setValue(null);
     }
 
     public void submitForm() {
@@ -67,7 +87,7 @@ public class AddNewPostViewModel extends ViewModel {
         // Calling sqlite from here
         boolean success = false;
         convertBitmapToByteArray(blogImages.getValue());
-        BlogObject blog = new BlogObject(null, "1", blogTitle.getValue(), "", blogText.getValue(), imageBlob, 0, 0, 0, "");
+        BlogObject blog = new BlogObject(null, "1", blogTitle.getValue(), locationName.getValue(), blogText.getValue(), imageBlob, locationLatLong.getValue().latitude, locationLatLong.getValue().longitude, 0, "");
         try {
             long ID = dbInstance.addBlogToTable(blog);
             Log.i(TAG, "ID: " + ID);

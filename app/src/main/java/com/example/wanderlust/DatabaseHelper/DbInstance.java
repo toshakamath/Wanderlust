@@ -35,7 +35,7 @@ public class DbInstance extends SQLiteOpenHelper {
 
 
     private static final String CREATE_TABLE_BLOG = "CREATE TABLE " + TABLE_BLOG + " (" + COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_2 +" INTEGER, "
-            + COL_3 + " TEXT, " + COL_4 + " TEXT, " + COL_5 + " TEXT, " + COL_7 + " FLOAT, " + COL_8 + " FLOAT, " + COL_9 + " INTEGER, " + COL_10 + " TEXT)";
+            + COL_3 + " TEXT, " + COL_4 + " TEXT, " + COL_5 + " TEXT, " + COL_7 + " DOUBLE, " + COL_8 + " DOUBLE, " + COL_9 + " INTEGER, " + COL_10 + " TEXT)";
 
 
     private  static final String CREATE_TABLE_BLOG_PICS = "CREATE TABLE " + TABLE_BLOG_PICS + " (" + COl_11 + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

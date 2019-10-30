@@ -12,13 +12,13 @@ public class BlogObject {
     private String blogLocation;
     private String blogText;
     private ArrayList<byte[]> blogPics;
-    private float blogLat;
-    private float blogLong;
+    private double blogLat;
+    private double blogLong;
     private int blogLikes;
     private  String blogReviews;
 
     public BlogObject(@Nullable String blogId, @Nullable String userId, @Nullable String blogTitle, @Nullable String blogLocation,
-                      @Nullable String blogText, @Nullable ArrayList<byte[]> blogPics, @Nullable float blogLat, @Nullable float blogLong, @Nullable int blogLikes,
+                      @Nullable String blogText, @Nullable ArrayList<byte[]> blogPics, @Nullable double blogLat, @Nullable double blogLong, @Nullable int blogLikes,
                       @Nullable String blogReviews) {
         this.blogId = blogId;
         this.userId = userId;
@@ -60,11 +60,11 @@ public class BlogObject {
         return blogPics;
     }
 
-    public float getBlogLat() {
+    public double getBlogLat() {
         return blogLat;
     }
 
-    public float getBlogLong() {
+    public double getBlogLong() {
         return blogLong;
     }
 

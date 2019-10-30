@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -21,11 +20,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.wanderlust.DatabaseHelper.DbInstance;
 import com.example.wanderlust.R;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AddNewPostFragment extends Fragment {
 
@@ -38,8 +45,15 @@ public class AddNewPostFragment extends Fragment {
     private EditText blogTitle, blogLocation, blogText;
     private Button uploadImgButton, clear, submit;
     private boolean successFlag = false;
+    private String locationName;
+    private String locationAddress;
+    private LatLng locationLatLng;
 
     ArrayList<Bitmap> imageList = new ArrayList<>();
+
+    PlacesClient placesClient;
+    List<Place.Field> placeFields;
+    AutocompleteSupportFragment autocompleteSupportFragment;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         addNewPostViewModel = ViewModelProviders.of(this).get(AddNewPostViewModel.class);
@@ -47,12 +61,17 @@ public class AddNewPostFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_addnewpost, container, false);
 
         blogTitle = (EditText) root.findViewById(R.id.blogTitle);
-        blogLocation = (EditText) root.findViewById(R.id.blogLocation);
         blogText = (EditText) root.findViewById(R.id.blogText);
 
         uploadImgButton = (Button) root.findViewById(R.id.uploadImgButton);
         clear = (Button) root.findViewById(R.id.clear);
         submit = (Button) root.findViewById(R.id.submit);
+
+        Places.initialize(getContext(), getResources().getString(R.string.GOOGLE_API_KEY));
+        placesClient = Places.createClient(getContext());
+        placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+
+        setupAutoCompleteFragment();
 
         uploadImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +120,9 @@ public class AddNewPostFragment extends Fragment {
                 addNewPostViewModel.getBlogText().setValue(blogText.getText().toString());
                 addNewPostViewModel.getBlogTitle().setValue(blogTitle.getText().toString());
                 addNewPostViewModel.getBlogImages().setValue(imageList);
+                addNewPostViewModel.getLocationName().setValue(locationName);
+                addNewPostViewModel.getLocationAddress().setValue(locationAddress);
+                addNewPostViewModel.getLocationLatLong().setValue(locationLatLng);
                 addNewPostViewModel.submitForm();
                 if(successFlag) {
                     Toast.makeText(getContext(), "Data was successfully uploaded to database!", Toast.LENGTH_SHORT).show();
@@ -150,5 +172,25 @@ public class AddNewPostFragment extends Fragment {
                 Toast.makeText(getContext(), "Images Uploaded Successfully!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void setupAutoCompleteFragment() {
+        autocompleteSupportFragment = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.blogLocation);
+
+        autocompleteSupportFragment.setPlaceFields(placeFields);
+
+        autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                locationName = place.getName();
+                locationAddress = place.getAddress();
+                locationLatLng = place.getLatLng();
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                Toast.makeText(getContext(), "Some error occured!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
