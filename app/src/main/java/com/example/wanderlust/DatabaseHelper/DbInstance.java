@@ -106,28 +106,6 @@ public class DbInstance extends SQLiteOpenHelper {
         return ID;
     }
 
-//    public long verifyUser (String email, String password) {
-//        Log.i(TAG, "add user - register : called");
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        long ID = 0;
-//
-//        db.beginTransaction();
-//        try {
-//            ContentValues contentValues = new ContentValues();
-//            contentValues.put(USERS_COLUMN_NAME, name);
-//            contentValues.put(USERS_COLUMN_EMAIL, email);
-//            contentValues.put(USERS_COLUMN_PASSWORD, password);
-//            ID = db.insert(TABLE_USERS, null, contentValues);
-//            db.setTransactionSuccessful();
-//        } catch (Exception e){
-//            Log.e(TAG, "error while entering data into table - " + TABLE_USERS);
-//        } finally {
-//            db.endTransaction();
-//        }
-//        Log.i("checkitout", ID+"");
-//        return ID;
-//    }
-
     public long addBlogToTable(BlogObject blogObject) {
         Log.i(TAG, "addBlogToTable : called");
         SQLiteDatabase db = this.getWritableDatabase();
@@ -173,6 +151,30 @@ public class DbInstance extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+    }
+
+
+    public BlogObject getOneBlogData (int blogId) {
+        ArrayList<byte[]> pics = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from " + TABLE_BLOG + " where "+COL_1+"="+blogId, null );
+        res.moveToFirst();
+        if(res.getCount() == 1){
+            String _blogId =res.getString(res.getColumnIndexOrThrow(COL_1));
+            String userId = res.getString(res.getColumnIndexOrThrow(COL_2));
+            String blogTitle = res.getString(res.getColumnIndexOrThrow(COL_3));
+            String blogLocation = res.getString(res.getColumnIndexOrThrow(COL_4));
+            String blogText = res.getString(res.getColumnIndexOrThrow(COL_5));
+            Double blogLat = res.getDouble(res.getColumnIndexOrThrow(COL_7));
+            Double blogLong = res.getDouble(res.getColumnIndexOrThrow(COL_8));
+            int blogLikes = res.getInt(res.getColumnIndexOrThrow(COL_9));
+            String blogReviews = res.getString(res.getColumnIndexOrThrow(COL_10));
+            BlogObject bo = new BlogObject(_blogId,userId,blogTitle,blogLocation,blogText,pics,blogLat,blogLong,blogLikes,blogReviews);
+            return bo;
+        }else{
+            return null;
+        }
+
     }
 
 
