@@ -2,12 +2,16 @@ package com.example.wanderlust;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.example.wanderlust.DatabaseHelper.DbInstance;
+import com.example.wanderlust.ui.auth.Login;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +23,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+//        Intent intent = getIntent();
+//        ArrayList<String> listOfBlogTitle = intent.getStringArrayListExtra(Login.EXTRA_NAME);
+//        String email = intent.getStringExtra(MainActivity.EMAIL);
+
     }
 
     @Override
