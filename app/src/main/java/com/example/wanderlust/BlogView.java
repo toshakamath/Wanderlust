@@ -18,8 +18,8 @@ public class BlogView extends AppCompatActivity {
         this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
-        //BlogObject bo = dbHelper.getOneBlogData(1);
-        BlogObject bo = new BlogObject("123","1", "Magnificent India","India",);
+        BlogObject bo = dbHelper.getOneBlogData(1);
+//        BlogObject bo = new BlogObject("123","1", "Magnificent India","India",);
         final TextView tv = (TextView) findViewById(R.id.textView2);
         if(bo == null){
             tv.setText("No Object");
