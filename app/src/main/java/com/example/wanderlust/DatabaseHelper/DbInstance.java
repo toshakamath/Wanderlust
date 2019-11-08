@@ -54,7 +54,7 @@ public class DbInstance extends SQLiteOpenHelper {
     private  static final String CREATE_TABLE_USER_DETAILS = "CREATE TABLE "+ TABLE_USERS +" ("+ USERS_COLUMN_USERID+ " INTEGER PRIMARY KEY AUTOINCREMENT,"+ USERS_COLUMN_NAME +" text, "+ USERS_COLUMN_EMAIL+" text UNIQUE, " +USERS_COLUMN_PASSWORD +" text )";
 
 //    private static final String GET_ALL_BLOG_DATA ="SELECT "+COL_3+" FROM "+TABLE_BLOG+" WHERE "+COL_1+" = 1";
-    private static final String GET_ALL_BLOG_PICS ="SELECT * FROM "+TABLE_BLOG_PICS;
+//    private static final String GET_ALL_BLOG_PICS ="SELECT * FROM "+TABLE_BLOG_PICS;
 
     public DbInstance(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -178,19 +178,38 @@ public class DbInstance extends SQLiteOpenHelper {
 
     public ArrayList<BlogObject> getAllBlogData () {
         Log.i(TAG, "get all blog data : called");
-        ArrayList<byte[]> pics = new ArrayList<>();
         ArrayList<BlogObject> data = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String GET_ALL_BLOG_DATA ="SELECT * FROM "+TABLE_BLOG;
+//        String GET_ALL_BLOG_PICS ="SELECT * FROM "+TABLE_BLOG_PICS+" WHERE "+COL_1+" = ";
+
         Log.i("QUERY: ", GET_ALL_BLOG_DATA);
+//        Log.i("QUERY: ", GET_ALL_BLOG_PICS);
         try {
-            Log.i(TAG, "inside try");
+            Log.i("tag", "inside try");
             Cursor res = db.rawQuery(GET_ALL_BLOG_DATA, null);
-            Log.i(TAG, "cursor count: "+res.getCount());
+            Log.i("tag", "cursor count: "+res.getCount());
             res.moveToFirst();
             if(res.getCount()>0){
+
                 while (res.isAfterLast() == false) {
                     String _blogId = res.getString(res.getColumnIndexOrThrow(COL_1));
+
+                    String GET_ALL_BLOG_PICS ="SELECT * FROM "+TABLE_BLOG_PICS+" WHERE "+COL_1+" = "+_blogId;
+                    Cursor res1 = db.rawQuery(GET_ALL_BLOG_PICS, null);
+                    Log.i("tag", "cursor count:::: "+res1.getCount());
+                    res1.moveToFirst();
+
+                    ArrayList<byte[]> pics = new ArrayList<>();
+                    while (res1.isAfterLast() == false){
+                        Log.i("tag", "coming hereee");
+                        byte [] blogPic = res1.getBlob(res1.getColumnIndexOrThrow(COL_6));
+                        pics.add(blogPic);
+                        Log.i("tag", "not coming hereee");
+                        res1.moveToNext();
+                    }
+                    res1.close();
+
                     String userId = res.getString(res.getColumnIndexOrThrow(COL_2));
                     String blogTitle = res.getString(res.getColumnIndexOrThrow(COL_3));
                     String blogLocation = res.getString(res.getColumnIndexOrThrow(COL_4));

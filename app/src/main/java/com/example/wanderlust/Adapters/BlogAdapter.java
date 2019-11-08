@@ -93,20 +93,13 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         textView2.setText(blogObject.getBlogText());
         ImageView img= viewHolder.blogImage;
         try{
-
+            Log.i("TAG", "coming here");
+//            byte array, int, length
+            Log.i("TAG", blogObject.getBlogPics()+"");
+            Log.i("TAG", blogObject.getBlogPics().get(0)+"");
             Bitmap bm = BitmapFactory.decodeByteArray(blogObject.getBlogPics().get(0), 0, blogObject.getBlogPics().get(0).length);
-
-//            DisplayMetrics dm = new DisplayMetrics();
-//            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-//            img.setMinimumHeight(dm.heightPixels);
-//            img.setMinimumWidth(dm.widthPixels);
-
             img.setImageBitmap(bm);
 
-//            new DownloadImageFromInternet(img).execute(cafe.getDescription());
-//            URL url = new URL(cafe.getDescription());
-//            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//            img.setImageBitmap(bmp);
         }catch(Exception e){
             System.out.println("ERROR IMAGE"+e.getMessage());
         }
