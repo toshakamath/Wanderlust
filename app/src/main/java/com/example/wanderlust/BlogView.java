@@ -25,6 +25,7 @@ public class BlogView extends AppCompatActivity {
         //BlogObject bo = dbHelper.getOneBlogData(1);
         ArrayList<byte[]> pics = new ArrayList<>();
         BlogObject bo = new BlogObject("123","1", "Magnificent India","India","This is India, with an average population of 2 billion",pics,20.770773,73.7217954,5,"Should Visit");
+
         final TextView tv = (TextView) findViewById(R.id.textView2);
         if(bo == null){
             tv.setText("No Object");

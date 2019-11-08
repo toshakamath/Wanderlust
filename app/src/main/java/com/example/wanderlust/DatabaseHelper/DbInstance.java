@@ -174,38 +174,44 @@ public class DbInstance extends SQLiteOpenHelper {
         }else{
             return null;
         }
-
     }
 
-
-    public ArrayList getAllBlogData () {
+    public ArrayList<BlogObject> getAllBlogData () {
         Log.i(TAG, "get all blog data : called");
-
-        ArrayList<String> data = new ArrayList<>();
-        String GET_ALL_BLOG_DATA ="SELECT "+COL_3+" FROM "+TABLE_BLOG;
+        ArrayList<byte[]> pics = new ArrayList<>();
+        ArrayList<BlogObject> data = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String GET_ALL_BLOG_DATA ="SELECT * FROM "+TABLE_BLOG;
         Log.i("QUERY: ", GET_ALL_BLOG_DATA);
-
-        SQLiteDatabase db = this.getWritableDatabase();
         try {
             Log.i(TAG, "inside try");
-            Cursor cursor = db.rawQuery(GET_ALL_BLOG_DATA, null);
-            Log.i(TAG, "cursor count: "+cursor.getCount());
-            if(cursor.getCount()>0) {
-                cursor.moveToFirst();
-                while (cursor.isAfterLast() == false) {
-                    String trial = cursor.getString(cursor.getColumnIndex(COL_3));
-                    Log.i("checkthisout", trial+"");
-                    data.add(cursor.getString(cursor.getColumnIndex(COL_3)));
-                    cursor.moveToNext();
+            Cursor res = db.rawQuery(GET_ALL_BLOG_DATA, null);
+            Log.i(TAG, "cursor count: "+res.getCount());
+            res.moveToFirst();
+            if(res.getCount()>0){
+                while (res.isAfterLast() == false) {
+                    String _blogId = res.getString(res.getColumnIndexOrThrow(COL_1));
+                    String userId = res.getString(res.getColumnIndexOrThrow(COL_2));
+                    String blogTitle = res.getString(res.getColumnIndexOrThrow(COL_3));
+                    String blogLocation = res.getString(res.getColumnIndexOrThrow(COL_4));
+                    String blogText = res.getString(res.getColumnIndexOrThrow(COL_5));
+                    Double blogLat = res.getDouble(res.getColumnIndexOrThrow(COL_7));
+                    Double blogLong = res.getDouble(res.getColumnIndexOrThrow(COL_8));
+                    int blogLikes = res.getInt(res.getColumnIndexOrThrow(COL_9));
+                    String blogReviews = res.getString(res.getColumnIndexOrThrow(COL_10));
+                    BlogObject bo = new BlogObject(_blogId, userId, blogTitle, blogLocation, blogText, pics, blogLat, blogLong, blogLikes, blogReviews);
+                    data.add(bo);
+                    res.moveToNext();
                 }
-                cursor.close();
+                res.close();
+                return data;
+            }else {
+                return null;
             }
         } catch (Exception e){
-            Log.e(TAG, "error while entering data into table - " + TABLE_USERS);
+            Log.e(TAG, "error while getting data from table - " + TABLE_BLOG);
         } finally {
         }
-        Log.i("checkitout2", data.toString()+"");
-        Log.i("checkitout3", data+"");
         return data;
     }
 

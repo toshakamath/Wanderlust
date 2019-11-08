@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.example.wanderlust.DatabaseHelper.DbInstance;
+import com.example.wanderlust.Doa.BlogObject;
 import com.example.wanderlust.ui.auth.Login;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -56,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-//        Intent intent = getIntent();
-//        ArrayList<String> listOfBlogTitle = intent.getStringArrayListExtra(Login.EXTRA_NAME);
-//        String email = intent.getStringExtra(MainActivity.EMAIL);
+        Intent intent = getIntent();
+        String email = intent.getStringExtra(Login.EXTRA_EMAIL);
+        String name = intent.getStringExtra(Login.EXTRA_NAME);
 
     }
 

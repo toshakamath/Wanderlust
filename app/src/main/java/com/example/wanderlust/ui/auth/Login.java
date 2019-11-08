@@ -1,6 +1,7 @@
 package com.example.wanderlust.ui.auth;
 
 import com.example.wanderlust.DatabaseHelper.DbInstance;
+import com.example.wanderlust.Doa.BlogObject;
 import com.example.wanderlust.MainActivity;
 import com.example.wanderlust.R;
 import com.example.wanderlust.ui.home.HomeFragment;
@@ -26,7 +27,7 @@ public class Login extends AppCompatActivity {
     DbInstance dbHelper = new DbInstance(this);
     Context parentThis = this;
     public static final String EXTRA_NAME = "com.example.wanderlust.NAME";
-    public static final String EXTRA_AL = "com.example.wanderlust.AL";
+    public static final String EXTRA_EMAIL = "com.example.wanderlust.EMAIL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +42,6 @@ public class Login extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.emailtextlogin);
         password = (EditText) findViewById(R.id.passwordtextlogin);
-
-        final DbInstance dbHelper = new DbInstance(this);
-        final ArrayList listOfBlogTitle = dbHelper.getAllBlogData();
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,23 +67,11 @@ public class Login extends AppCompatActivity {
                 Log.i("HEYYYY", username);
 
                 if (!username.equals("")) {
-                    listOfBlogTitle.clear();
-                    listOfBlogTitle.addAll(dbHelper.getAllBlogData());
-                    Log.i("checkout4: AL blogtitle",listOfBlogTitle+"");
                     Toast.makeText(parentThis, "Welcome, " + username, Toast.LENGTH_LONG).show();
-//                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-//                    i.putExtra(EXTRA_NAME, username);
-//                    i.putExtra(EXTRA_AL, listOfBlogTitle);
-//                    startActivity(i);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString(EXTRA_NAME, username);
-                    bundle.putStringArrayList(EXTRA_AL, listOfBlogTitle);
-                    // set Fragmentclass Arguments
-                    HomeFragment fragobj = new HomeFragment();
-                    fragobj.setArguments(bundle);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    i.putExtra(EXTRA_NAME, username);
+                    i.putExtra(EXTRA_EMAIL, email.getText().toString());
+                    startActivity(i);
                 }
                 else{
                     Toast.makeText(parentThis, "User " + email.getText()+ " does not exist, please register.", Toast.LENGTH_LONG).show();
