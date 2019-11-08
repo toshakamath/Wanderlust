@@ -6,69 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".BlogView">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:paddingLeft="17dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="10dp"/>
+            android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:text="TextView"
+                android:textSize="24dp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvName"
-            android:layout_centerHorizontal="true"
-            android:textStyle="italic"
-            android:drawableLeft="@drawable/ic_place_black_24dp"
-            android:text="San Jose"
-            android:paddingLeft="12dp"
-            android:textSize="16dp"/>
-        <ImageView
-            android:id="@+id/header_cover_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="fitCenter"
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvName"
+                android:layout_centerHorizontal="true"
+                android:drawableLeft="@drawable/ic_place_black_24dp"
+                android:paddingLeft="12dp"
+                android:text="San Jose"
+                android:textSize="16dp"
+                android:textStyle="italic" />
 
-            android:src="@drawable/wanderlust_logo" />
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingLeft="12dp"
-            android:textStyle="bold"
-            android:text="Something" />
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/header_cover_image"
-            android:layout_centerHorizontal="true"
-            android:justificationMode="inter_word"
-            android:text="India is a vast South Asian country with diverse terrain from Himalayan peaks to Indian Ocean coastline and history reaching back 5 millennia. In the north, Mughal Empire landmarks include Delhi’s Red Fort complex and massive Jama Masjid mosque, plus Agra’s iconic Taj Mahal mausoleum. Pilgrims bathe in the Ganges in Varanasi, and Rishikesh is a yoga centre and base for Himalayan trekking."
-            android:paddingLeft="12dp"
-            android:textSize="16dp"/>
+            <ImageView
+                android:id="@+id/header_cover_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="center"
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingLeft="12dp"
-            android:textStyle="bold"
-            android:text="Reviews" />
-    </LinearLayout>
+                android:src="@drawable/tajmahal" />
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:text="Something"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_cover_image"
+                android:layout_centerHorizontal="true"
+                android:justificationMode="inter_word"
+                android:paddingLeft="12dp"
+                android:text="India is a vast South Asian country with diverse terrain from Himalayan peaks to Indian Ocean coastline and history reaching back 5 millennia. In the north, Mughal Empire landmarks include Delhi’s Red Fort complex and massive Jama Masjid mosque, plus Agra’s iconic Taj Mahal mausoleum. Pilgrims bathe in the Ganges in Varanasi, and Rishikesh is a yoga centre and base for Himalayan trekking."
+                android:textSize="16dp" />
+            <ImageView
+                android:id="@+id/header_cover_image2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerCrop"
+
+                android:src="@drawable/helloindia" />
+            <TextView
+                android:id="@+id/visit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:text="Best Time To Visit"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvVisitingHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_cover_image"
+                android:layout_centerHorizontal="true"
+                android:justificationMode="inter_word"
+                android:paddingLeft="12dp"
+                android:text="The best time to visit India is ideally from late October to the end of April. However, India has a very distinctive climate and a different concept of seasons. The winters are mostly pleasant with moderate temperatures and almost no precipitation. The summer months of April, May, October and November thought, can get unbearably hot. From June to September, the monsoon covers the entire country in heavy rains."
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:text="Reviews"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvReviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_cover_image"
+                android:layout_centerHorizontal="true"
+                android:justificationMode="inter_word"
+                android:paddingLeft="12dp"
+                android:text="India is a vast South Asian country with diverse terrain from Himalayan peaks to Indian Ocean coastline and history reaching back 5 millennia. In the north, Mughal Empire landmarks include Delhi’s Red Fort complex and massive Jama Masjid mosque, plus Agra’s iconic Taj Mahal mausoleum. Pilgrims bathe in the Ganges in Varanasi, and Rishikesh is a yoga centre and base for Himalayan trekking."
+                android:textSize="16dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
