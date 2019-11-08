@@ -18,13 +18,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-<<<<<<< HEAD
 import com.example.wanderlust.BlogView;
-=======
 import com.example.wanderlust.Adapters.BlogAdapter;
 import com.example.wanderlust.DatabaseHelper.DbInstance;
 import com.example.wanderlust.Doa.BlogObject;
->>>>>>> a6263f6343253669d1fca65753f5dac8dd7ddb77
+
 import com.example.wanderlust.MainActivity;
 import com.example.wanderlust.R;
 import com.example.wanderlust.ui.auth.Login;
@@ -46,18 +44,21 @@ public class HomeFragment extends Fragment {
 
         final DbInstance dbHelper = new DbInstance(getActivity());
         final ArrayList<BlogObject> blogData = dbHelper.getAllBlogData();
-        BlogAdapter blogAdapter = new BlogAdapter(blogData);
+        if(blogData != null){
+            BlogAdapter blogAdapter = new BlogAdapter(blogData);
 
-        for(int i=0; i<blogData.size(); i++){
-            Log.i("Tag: "+i, blogData.get(i).getBlogId());
-            Log.i("Tag: "+i, blogData.get(i).getBlogTitle());
-            Log.i("Tag: "+i, blogData.get(i).getBlogText());
-            Log.i("Tag: "+i, blogData.get(i).getBlogLocation());
-            Log.i("Tag: "+i, blogData.get(i).getBlogReviews());
+            for(int i=0; i<blogData.size(); i++){
+                Log.i("Tag: "+i, blogData.get(i).getBlogId());
+                Log.i("Tag: "+i, blogData.get(i).getBlogTitle());
+                Log.i("Tag: "+i, blogData.get(i).getBlogText());
+                Log.i("Tag: "+i, blogData.get(i).getBlogLocation());
+                Log.i("Tag: "+i, blogData.get(i).getBlogReviews());
+            }
+
+            recycleCards.setAdapter(blogAdapter);
+            recycleCards.setLayoutManager(new LinearLayoutManager(getContext()));
+
         }
-
-        recycleCards.setAdapter(blogAdapter);
-        recycleCards.setLayoutManager(new LinearLayoutManager(getContext()));
 
 //        blogData.clear();
 //        blogData.addAll(dbHelper.getAllBlogData());
