@@ -137,8 +137,10 @@ public class DbInstance extends SQLiteOpenHelper {
     public void addBlogPicsToTable(BlogObject blogObject) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.beginTransaction();
+        Log.i("tag", "======>"+blogObject.getBlogPics());
         try {
             for (byte[] img : blogObject.getBlogPics()) {
+                Log.i("tag", "======>2 "+img);
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(COL_1, Integer.parseInt(blogObject.getBlogId()));
                 contentValues.put(COL_6, img);
@@ -195,7 +197,10 @@ public class DbInstance extends SQLiteOpenHelper {
                 while (res.isAfterLast() == false) {
                     String _blogId = res.getString(res.getColumnIndexOrThrow(COL_1));
 
-                    String GET_ALL_BLOG_PICS ="SELECT * FROM "+TABLE_BLOG_PICS+" WHERE "+COL_1+" = "+_blogId;
+//                    String GET_ALL_BLOG_PICS ="SELECT * FROM "+TABLE_BLOG_PICS;
+                    String GET_ALL_BLOG_PICS ="SELECT "+COL_6+" FROM " + TABLE_BLOG_PICS + " WHERE " + COL_1 + " = '" +_blogId+"'";
+                    Log.i("tag: ", GET_ALL_BLOG_PICS);
+
                     Cursor res1 = db.rawQuery(GET_ALL_BLOG_PICS, null);
                     Log.i("tag", "cursor count:::: "+res1.getCount());
                     res1.moveToFirst();
