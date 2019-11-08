@@ -17,8 +17,7 @@
                 android:id="@+id/blog_image"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/wanderlust_logo" />
+                android:scaleType="centerCrop" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,14 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
+                    android:id="@+id/viewBlogButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="action_share"
-                    android:theme="@style/PrimaryFlatButton" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="action_explore"
+                    android:text="View Entire Blog"
                     android:theme="@style/PrimaryFlatButton" />
             </LinearLayout>
         </LinearLayout>
