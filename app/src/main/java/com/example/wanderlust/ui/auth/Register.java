@@ -1,9 +1,12 @@
 package com.example.wanderlust.ui.auth;
 
-import com.example.wanderlust.DatabaseHelper.DbInstance;
-import com.example.wanderlust.MainActivity;
+import com.example.wanderlust.Doa.UserObject;
 import com.example.wanderlust.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -17,14 +20,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Register extends AppCompatActivity {
 
     Button cancel, register, login;
     EditText name, email, password;
-    DbInstance dbHelper = new DbInstance(this);
     Context parentThis = this;
     public static final String EXTRA_MESSAGE = "com.example.lab1.MESSAGE";
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class Register extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_register);
+
+        db = FirebaseFirestore.getInstance();
 
         cancel = (Button) findViewById(R.id.cancelbutton);
         register = (Button) findViewById(R.id.registerbutton);
@@ -76,19 +82,31 @@ public class Register extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                long insertsuccess = dbHelper.insertNewUser(name.getText().toString(), email.getText().toString(), password.getText().toString());
-                if (insertsuccess>0) {
-                    Toast.makeText(parentThis, "Welcome, " + name.getText()+"! Please login!", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplicationContext(), Login.class);
-                    String message = name.getText().toString();
-                    i.putExtra(EXTRA_MESSAGE, message);
-                    startActivity(i);
-                }
-                else{
-                    Toast.makeText(parentThis, "User " + email.getText()+ " already exists, please login.", Toast.LENGTH_LONG).show();
+                if (name.getText().toString().equals("") || email.getText().toString().equals("") || password.getText().toString().equals("")){
+                    Toast.makeText(parentThis, "Please enter Name, Email and Password", Toast.LENGTH_LONG).show();
+                } else {
+                    final UUID userId = UUID.randomUUID();
+                    UserObject userObject = new UserObject(userId.toString(), name.getText().toString(), email.getText().toString(), password.getText().toString());
+                    db.collection("user_table").document(userId.toString()).set(userObject).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                            Toast.makeText(parentThis, "Welcome, " + name.getText() + "! Please login!", Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(getApplicationContext(), Login.class);
+                            String message = name.getText().toString();
+                            i.putExtra(EXTRA_MESSAGE, message);
+                            startActivity(i);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(parentThis, "User " + email.getText() + " already exists, please login.", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
         });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

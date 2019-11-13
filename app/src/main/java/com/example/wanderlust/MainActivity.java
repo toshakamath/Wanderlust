@@ -4,32 +4,30 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.Toast;
 
-import com.example.wanderlust.DatabaseHelper.DbInstance;
-import com.example.wanderlust.Doa.BlogObject;
+import com.example.wanderlust.Doa.UserObject;
 import com.example.wanderlust.ui.auth.Login;
+import com.example.wanderlust.ui.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Vector;
-
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+
+    private String email;
+    private String name;
+    private String Id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +56,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         Intent intent = getIntent();
-        String email = intent.getStringExtra(Login.EXTRA_EMAIL);
-        String name = intent.getStringExtra(Login.EXTRA_NAME);
+        email = intent.getStringExtra(Login.EXTRA_EMAIL);
+        name = intent.getStringExtra(Login.EXTRA_NAME);
+        Id = intent.getStringExtra(Login.EXTRA_ID);
+    }
 
+    public UserObject getUserData(){
+        UserObject userObject = new UserObject(Id, name, email);
+        return userObject;
     }
 
     @Override
@@ -99,5 +102,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
 }
+

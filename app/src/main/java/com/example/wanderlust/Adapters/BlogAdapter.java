@@ -1,34 +1,20 @@
 package com.example.wanderlust.Adapters;
 
-
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.os.AsyncTask;
-import android.util.DisplayMetrics;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanderlust.Doa.BlogObject;
 import com.example.wanderlust.R;
+import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
@@ -38,6 +24,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
     // Used to cache the views within the item layout for fast access
 
     private List<BlogObject> blogObjects;
+    private Context context;
 
     // Pass in the array into the constructor
     public BlogAdapter(List<BlogObject> blogObjects) {
@@ -68,7 +55,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
     @Override
     public BlogAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
@@ -92,17 +79,10 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         TextView textView2 = viewHolder.blogContent;
         textView2.setText(blogObject.getBlogText());
         ImageView img= viewHolder.blogImage;
-        try{
-            Log.i("TAG", "coming here");
-//            byte array, int, length
-            Log.i("TAG", blogObject.getBlogPics()+"");
-            Log.i("TAG", blogObject.getBlogPics().get(0)+"");
-            Bitmap bm = BitmapFactory.decodeByteArray(blogObject.getBlogPics().get(0), 0, blogObject.getBlogPics().get(0).length);
-            img.setImageBitmap(bm);
-
-        }catch(Exception e){
-            System.out.println("ERROR IMAGE"+e.getMessage());
+        if(blogObject.getblogPicUrl() != null) {
+            Picasso.with(context).load(blogObject.getblogPicUrl()).into(img);
         }
+
     }
 
     // Returns the total count of items in the list

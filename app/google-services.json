@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "206474799497",
+    "firebase_url": "https://wanderlust-d71eb.firebaseio.com",
+    "project_id": "wanderlust-d71eb",
+    "storage_bucket": "wanderlust-d71eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206474799497:android:dbd887f3601a7c1d5bd958",
+        "android_client_info": {
+          "package_name": "com.example.wanderlust"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206474799497-0ficsuioc1soq9j21e8jljfsrmp2t14g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wanderlust",
+            "certificate_hash": "c03c436308d6ed590ff32b696c88f87beeb89b74"
+          }
+        },
+        {
+          "client_id": "206474799497-cm7j4imiarahqa7dkpln8irouv3g0qm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi46oXgRCXHjBsURCa7gkDys3ekA2yvt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206474799497-cm7j4imiarahqa7dkpln8irouv3g0qm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

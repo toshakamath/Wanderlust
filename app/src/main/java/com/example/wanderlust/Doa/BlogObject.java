@@ -11,25 +11,29 @@ public class BlogObject {
     private String blogTitle;
     private String blogLocation;
     private String blogText;
-    private ArrayList<byte[]> blogPics;
     private double blogLat;
     private double blogLong;
     private int blogLikes;
-    private  String blogReviews;
+    private ArrayList<String> blogReviews;
+    private String blogPicUrl;
 
     public BlogObject(@Nullable String blogId, @Nullable String userId, @Nullable String blogTitle, @Nullable String blogLocation,
-                      @Nullable String blogText, @Nullable ArrayList<byte[]> blogPics, @Nullable double blogLat, @Nullable double blogLong, @Nullable int blogLikes,
-                      @Nullable String blogReviews) {
+                      @Nullable String blogText, @Nullable double blogLat, @Nullable double blogLong, @Nullable int blogLikes,
+                      @Nullable ArrayList<String> blogReviews, @Nullable String blogPicUrl) {
         this.blogId = blogId;
         this.userId = userId;
         this.blogTitle = blogTitle;
         this.blogLocation = blogLocation;
         this.blogText = blogText;
-        this.blogPics = blogPics;
         this.blogLat = blogLat;
         this.blogLong = blogLong;
         this.blogLikes = blogLikes;
         this.blogReviews = blogReviews;
+        this.blogPicUrl = blogPicUrl;
+    }
+
+    public void setblogPicUrl(String blogPicUrl) {
+        this.blogPicUrl = blogPicUrl;
     }
 
     public void setBlogId(String blogId) {
@@ -56,8 +60,8 @@ public class BlogObject {
         return blogText;
     }
 
-    public ArrayList<byte[]> getBlogPics() {
-        return blogPics;
+    public String getblogPicUrl() {
+        return blogPicUrl;
     }
 
     public double getBlogLat() {
@@ -72,7 +76,23 @@ public class BlogObject {
         return blogLikes;
     }
 
-    public String getBlogReviews() {
+    public ArrayList<String> getBlogReviews() {
         return blogReviews;
+    }
+
+    @Override
+    public String toString() {
+        return "BlogObject{" +
+                "blogId='" + blogId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", blogTitle='" + blogTitle + '\'' +
+                ", blogLocation='" + blogLocation + '\'' +
+                ", blogText='" + blogText + '\'' +
+                ", blogLat=" + blogLat +
+                ", blogLong=" + blogLong +
+                ", blogLikes=" + blogLikes +
+                ", blogReviews=" + blogReviews +
+                ", blogPicUrl='" + blogPicUrl + '\'' +
+                '}';
     }
 }

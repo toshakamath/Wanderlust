@@ -1,35 +1,39 @@
 package com.example.wanderlust.ui.home;
 
-import android.content.Intent;
-import android.nfc.Tag;
+
+
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanderlust.Adapters.BlogAdapter;
-import com.example.wanderlust.DatabaseHelper.DbInstance;
 import com.example.wanderlust.Doa.BlogObject;
-import com.example.wanderlust.MainActivity;
 import com.example.wanderlust.R;
-import com.example.wanderlust.ui.auth.Login;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
+    private static final String TAG = "HomeFragment";
     private HomeViewModel homeViewModel;
     private RecyclerView recycleCards;
+    private BlogAdapter blogAdapter;
+
+    private FirebaseFirestore db;
+    private ArrayList<BlogObject> allBlogs;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,28 +47,47 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+        allBlogs = new ArrayList<>();
 
         recycleCards = (RecyclerView) root.findViewById(R.id.recycle_cards);
-
-        final DbInstance dbHelper = new DbInstance(getActivity());
-        final ArrayList<BlogObject> blogData = dbHelper.getAllBlogData();
-        BlogAdapter blogAdapter = new BlogAdapter(blogData);
-
-        for(int i=0; i<blogData.size(); i++){
-            Log.i("Tag: "+i, blogData.get(i).getBlogId());
-            Log.i("Tag: "+i, blogData.get(i).getBlogTitle());
-            Log.i("Tag: "+i, blogData.get(i).getBlogText());
-            Log.i("Tag: "+i, blogData.get(i).getBlogLocation());
-            Log.i("Tag: "+i, blogData.get(i).getBlogReviews());
-        }
-
-        recycleCards.setAdapter(blogAdapter);
+        recycleCards.setHasFixedSize(true);
         recycleCards.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//        blogData.clear();
-//        blogData.addAll(dbHelper.getAllBlogData());
+        db = FirebaseFirestore.getInstance();
+
+        getAllBlogData();
+
+//            recycleCards.setAdapter(blogAdapter);
+//            recycleCards.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+////        blogData.clear();
+////        blogData.addAll(dbHelper.getAllBlogData());
 
         return root;
 
+    }
+
+    private void getAllBlogData() {
+        db.collection("blog_table").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                    long blogLikes = (long) documentSnapshot.get("blogLikes");
+                    BlogObject blog = new BlogObject((String) documentSnapshot.get("blogId"), (String) documentSnapshot.get("userId"), (String) documentSnapshot.get("blogTitle"),
+                    (String)documentSnapshot.get("blogLocation"), (String)documentSnapshot.get("blogText"), (Double) documentSnapshot.get("blogLat"),
+                            (Double) documentSnapshot.get("blogLong"), (int) blogLikes, (ArrayList<String>) documentSnapshot.get("blogReviews"),
+                            (String) documentSnapshot.get("blogPicUrl"));
+
+                    allBlogs.add(blog);
+                }
+                blogAdapter = new BlogAdapter(allBlogs);
+                recycleCards.setAdapter(blogAdapter);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "No Blogs To Display", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
