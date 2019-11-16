@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.blogdetails.BlogDetail">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:id="@+id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/currBlogTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="10dp"
+                    android:text="Title"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/currBlogPlaceIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30sp"
+                    android:layout_below="@+id/currBlogTitle"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:src="@drawable/ic_place_black_24dp" />
+
+                <TextView
+                    android:id="@+id/currBlogLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/currBlogTitle"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toRightOf="@id/currBlogPlaceIcon"
+                    android:text="Location"
+                    android:textSize="22sp"
+                    android:textStyle="italic" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relLayout1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/currBlogImg"
+                    android:layout_width="350dp"
+                    android:layout_height="280dp"
+                    android:layout_marginTop="10dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relLayout2">
+
+                <TextView
+                    android:id="@+id/desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="10dp"
+                    android:text="Description"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/currBlogDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@id/desc"
+                    android:layout_marginTop="5dp"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/relLayout3">
+
+                <RelativeLayout
+                    android:id="@+id/heartLayout"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/image_heart_red"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_like_red_24dp"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/image_heart"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_like_border_black_24dp"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/currBlogLikes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/heartLayout"
+                    android:text="likes"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <RelativeLayout
+                    android:id="@+id/bookMarkLayout"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/currBlogLikes"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/image_bookmark_black"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_bookmark_black_24dp"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/image_bookmark"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_bookmark_border_black_24dp"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/image_comment"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="158dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/bookMarkLayout"
+                    android:src="@drawable/ic_insert_comment_black_24dp"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

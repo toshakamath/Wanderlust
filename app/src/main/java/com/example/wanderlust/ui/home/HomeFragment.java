@@ -3,6 +3,7 @@ package com.example.wanderlust.ui.home;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanderlust.Adapters.BlogAdapter;
 import com.example.wanderlust.Doa.BlogObject;
+import com.example.wanderlust.Doa.UserObject;
+import com.example.wanderlust.MainActivity;
 import com.example.wanderlust.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +34,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private RecyclerView recycleCards;
     private BlogAdapter blogAdapter;
+    private String userId;
 
     private FirebaseFirestore db;
     private ArrayList<BlogObject> allBlogs;
@@ -48,6 +52,9 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
         allBlogs = new ArrayList<>();
+
+        UserObject userObject = ((MainActivity) getActivity()).getUserData();
+        userId = userObject.getUserId();
 
         recycleCards = (RecyclerView) root.findViewById(R.id.recycle_cards);
         recycleCards.setHasFixedSize(true);
@@ -80,7 +87,7 @@ public class HomeFragment extends Fragment {
 
                     allBlogs.add(blog);
                 }
-                blogAdapter = new BlogAdapter(allBlogs);
+                blogAdapter = new BlogAdapter(allBlogs, userId);
                 recycleCards.setAdapter(blogAdapter);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -90,4 +97,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+
 }
