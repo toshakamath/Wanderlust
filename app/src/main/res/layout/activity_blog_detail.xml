@@ -185,6 +185,51 @@
                     android:visibility="visible" />
 
             </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/relLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/relLayout4">
+
+                <TextView
+                    android:id="@+id/displayBlogComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:textStyle="italic"
+                    android:textSize="16sp"
+                    android:textColor="@color/commentColor"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/relLayout5">
+
+                <EditText
+                    android:id="@+id/addComment"
+                    android:layout_width="290dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_layout_1"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="10dp"
+                    android:hint="Add Comment"
+                    android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/submitComment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/addComment"
+                        android:text="Submit"
+                        android:visibility="gone"/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 

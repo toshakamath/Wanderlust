@@ -9,12 +9,15 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wanderlust.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -45,6 +48,11 @@ public class BlogDetail extends AppCompatActivity {
     private Boolean bookmarkedByCurrUser;
     private String userId;
     private ArrayList<String> bookmarkedBlogIds;
+    private ImageView addCommentButton;
+    private EditText addComment;
+    private Button submitComment;
+    private ArrayList<String> blogComments;
+    private TextView displayBlogComments;
 
 
     @Override
@@ -65,10 +73,37 @@ public class BlogDetail extends AppCompatActivity {
         heartWhite = (ImageView) findViewById(R.id.image_heart);
         bookMarkBlack = (ImageView) findViewById(R.id.image_bookmark_black);
         bookMarkWhite = (ImageView) findViewById(R.id.image_bookmark);
+        addCommentButton = (ImageView) findViewById(R.id.image_comment);
+        addComment = (EditText) findViewById(R.id.addComment);
+        submitComment = (Button) findViewById(R.id.submitComment);
+        displayBlogComments = (TextView) findViewById(R.id.displayBlogComments);
+
+        addCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addComment.setVisibility(View.VISIBLE);
+                submitComment.setVisibility(View.VISIBLE);
+            }
+        });
+
+        submitComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addComment.setVisibility(View.GONE);
+                submitComment.setVisibility(View.GONE);
+
+                //Call db from here
+                String blogString = addComment.getText().toString();
+                addComment.setText("");
+                insertCommentInDB(blogString);
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
 
         bookmarkedBlogIds = new ArrayList<>();
+
+        blogComments = new ArrayList<>();
 
         gestureDetector = new GestureDetector(this, new GestureListener());
 
@@ -86,6 +121,48 @@ public class BlogDetail extends AppCompatActivity {
         checkIfBookmarkedByCurrUser();
     }
 
+    private void insertCommentInDB(String blogString) {
+
+        Log.i(TAG, "insertCommentInDB : called");
+
+        blogComments.add(blogString);
+//        Log.i(TAG, "blogComments :" + blogComments.size());
+        DocumentReference documentReference = db.collection("blog_table").document(blogId);
+
+        documentReference.update("blogReviews", blogComments).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    //Called get comments method
+                    getAllBlogComments();
+                    Toast.makeText(getBaseContext(), "Blog Comment saved Successfully!", Toast.LENGTH_LONG).show();
+                } else{
+                    Toast.makeText(getBaseContext(), "Failure to save Blog Comment!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void getAllBlogComments() {
+        DocumentReference docRef = db.collection("blog_table").document(blogId);
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot != null) {
+                        blogComments = (ArrayList<String>) documentSnapshot.get("blogReviews");
+                    }
+                    Log.i(TAG, "blogComments.size() : "+ blogComments.size());
+                    setComments(blogComments);
+                }
+
+            }
+        });
+    }
+
     private void getIncomingIntents() {
         Log.i(TAG, "getIncomingIntents : checking for incoming intents");
 
@@ -95,7 +172,7 @@ public class BlogDetail extends AppCompatActivity {
         }
 
         if(getIntent().hasExtra("blogId") && getIntent().hasExtra("blogTitle") && getIntent().hasExtra("blogLocation") && getIntent().hasExtra("blogPicUrl")
-                && getIntent().hasExtra("blogLikes") && getIntent().hasExtra("blogDesc")) {
+                && getIntent().hasExtra("blogLikes") && getIntent().hasExtra("blogDesc") && getIntent().hasExtra("blogReviews")) {
 
             Log.i(TAG, "getIncomingIntents : found intent extras");
 
@@ -105,16 +182,42 @@ public class BlogDetail extends AppCompatActivity {
             String blogPicUrl = getIntent().getStringExtra("blogPicUrl");
             String blogDesc = getIntent().getStringExtra("blogDesc");
             String blogLikes = getIntent().getStringExtra("blogLikes");
+            ArrayList<String> blogReviews = getIntent().getStringArrayListExtra("blogReviews");
 
 //            Log.i(TAG, "blogId : " + blogId);
 //            Log.i(TAG, "blogTitle : " + blogTitle);
 //            Log.i(TAG, "blogLikes : " + blogLikes);
 //            Log.i(TAG, "blogPicUrl : " + blogPicUrl);
-            setData(blogTitle, blogLocation, blogDesc, blogPicUrl, blogLikes);
+//            Log.i(TAG, "blogReviews : " + blogReviews.size());
+            setData(blogTitle, blogLocation, blogDesc, blogPicUrl, blogLikes, blogReviews);
         }
     }
 
-    private void setData(String blogTitle, String blogLocation, String blogDesc, String blogPicUrl, String blogLikes) {
+    private void setComments(ArrayList<String> blogReviews) {
+        blogComments = blogReviews;
+        int blogReviewsLength = blogReviews.size();
+        String reviewString = "";
+        if(blogReviewsLength == 1){
+            reviewString = "Comments: " + blogReviews.get(0);
+        }
+        else if(blogReviewsLength == 2){
+            reviewString = "Comments: " + blogReviews.get(0) + " and " + blogReviews.get(1);
+        }
+        else if(blogReviewsLength == 3){
+            reviewString = "Comments: " + blogReviews.get(0) + " , " + blogReviews.get(1) + " and " + blogReviews.get(2);
+        }
+        else if(blogReviewsLength == 4){
+            reviewString = "Comments: " + blogReviews.get(0) + " , " + blogReviews.get(1) + " , " + blogReviews.get(2) + " and " + blogReviews.get(3);
+        }
+        else if(blogReviewsLength > 4){
+            reviewString = "Comments: " + blogReviews.get(0) + " , " + blogReviews.get(1) + " , " + blogReviews.get(2) + " , " + blogReviews.get(3)
+                    + " and " + (blogReviewsLength - 4) + " others";
+        }
+        Log.d(TAG, "setData: reviews string: " + reviewString);
+        displayBlogComments.setText(reviewString);
+    }
+
+    private void setData(String blogTitle, String blogLocation, String blogDesc, String blogPicUrl, String blogLikes, ArrayList<String> blogReviews) {
 
         currBlogTitle.setText(blogTitle);
         currBlogLocation.setText(blogLocation);
@@ -126,6 +229,9 @@ public class BlogDetail extends AppCompatActivity {
         else{
             String likes = blogLikes + " likes";
             currBlogLikes.setText(likes);
+        }
+        if(blogReviews.size() != 0 || blogReviews != null){
+            setComments(blogReviews);
         }
         Picasso.with(this).load(blogPicUrl).into(currBlogImg);
     }

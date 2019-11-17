@@ -111,6 +111,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
                 intent.putExtra("blogLikes", String.valueOf(blogObject.getBlogLikes()));
                 intent.putExtra("blogDesc", blogObject.getBlogText());
                 intent.putExtra("userId", userId);
+                intent.putExtra("blogReviews", blogObject.getBlogReviews());
                 context.startActivity(intent);
             }
         });
