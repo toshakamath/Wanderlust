@@ -1,5 +1,7 @@
 package com.example.wanderlust.ui.home;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -7,11 +9,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -45,7 +50,6 @@ public class HomeFragment extends Fragment {
         final DbInstance dbHelper = new DbInstance(getActivity());
         final ArrayList<BlogObject> blogData = dbHelper.getAllBlogData();
         if(blogData != null){
-            BlogAdapter blogAdapter = new BlogAdapter(blogData);
 
             for(int i=0; i<blogData.size(); i++){
                 Log.i("Tag: "+i, blogData.get(i).getBlogId());
@@ -55,7 +59,14 @@ public class HomeFragment extends Fragment {
                 Log.i("Tag: "+i, blogData.get(i).getBlogReviews());
             }
 
-            recycleCards.setAdapter(blogAdapter);
+            recycleCards.setAdapter(new BlogAdapter(blogData,new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getActivity(), BlogView.class);
+                    startActivity(i);
+                }
+            }));
+
             recycleCards.setLayoutManager(new LinearLayoutManager(getContext()));
 
         }

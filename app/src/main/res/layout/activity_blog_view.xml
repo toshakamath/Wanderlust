@@ -22,7 +22,7 @@
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="10dp"
-                android:text="TextView"
+                android:text="Incredible India"
                 android:textSize="24dp"
                 android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
                 android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/ic_place_black_24dp"
                 android:paddingLeft="12dp"
-                android:text="San Jose"
+                android:text="Delhi, India"
                 android:textSize="16dp"
                 android:textStyle="italic" />
 
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="center"
-
+                android:padding="10dp"
                 android:src="@drawable/tajmahal" />
             <TextView
                 android:id="@+id/textView21"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="12dp"
                 android:paddingTop="12dp"
-                android:text="Something"
+                android:text="Description"
                 android:textStyle="bold" />
 
             <TextView
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="centerCrop"
-
+                android:padding="30dp"
                 android:src="@drawable/helloindia" />
             <TextView
                 android:id="@+id/visit"
@@ -111,6 +111,26 @@
                 android:justificationMode="inter_word"
                 android:paddingLeft="12dp"
                 android:text="India is a vast South Asian country with diverse terrain from Himalayan peaks to Indian Ocean coastline and history reaching back 5 millennia. In the north, Mughal Empire landmarks include Delhi’s Red Fort complex and massive Jama Masjid mosque, plus Agra’s iconic Taj Mahal mausoleum. Pilgrims bathe in the Ganges in Varanasi, and Rishikesh is a yoga centre and base for Himalayan trekking."
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:text="Author"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_cover_image"
+                android:layout_centerHorizontal="true"
+                android:justificationMode="inter_word"
+                android:paddingLeft="12dp"
+                android:text="Dr. Raj Kapoor"
                 android:textSize="16dp" />
         </LinearLayout>
     </ScrollView>

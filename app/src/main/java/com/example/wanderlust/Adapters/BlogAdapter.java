@@ -3,8 +3,10 @@ package com.example.wanderlust.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.util.DisplayMetrics;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,11 +24,14 @@ import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wanderlust.BlogView;
 import com.example.wanderlust.Doa.BlogObject;
+import com.example.wanderlust.MainActivity;
 import com.example.wanderlust.R;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.security.AccessController.getContext;
@@ -38,10 +44,23 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
     // Used to cache the views within the item layout for fast access
 
     private List<BlogObject> blogObjects;
+    private AdapterView.OnClickListener listener;
+    ArrayList<Integer> imgs = new ArrayList<>();
+
 
     // Pass in the array into the constructor
-    public BlogAdapter(List<BlogObject> blogObjects) {
+    public BlogAdapter(List<BlogObject> blogObjects, AdapterView.OnClickListener listener) {
         this.blogObjects = blogObjects;
+        this.listener = listener;
+        imgs.add(R.drawable.helloindia);
+        imgs.add(R.drawable.beijing);
+        imgs.add(R.drawable.tajmahal);
+        imgs.add(R.drawable.sf);
+        imgs.add(R.drawable.timesquare);
+        imgs.add(R.drawable.wanderlust_logo);
+        imgs.add(R.drawable.wanderlust_logo);
+        imgs.add(R.drawable.wanderlust_logo);
+        imgs.add(R.drawable.wanderlust_logo);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -51,6 +70,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         public TextView blogTitle;
         public TextView blogContent;
         public ImageView blogImage;
+        public Button blogButton;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -62,6 +82,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
             blogTitle = (TextView) itemView.findViewById(R.id.blog_title);
             blogContent = (TextView) itemView.findViewById(R.id.blog_content);
             blogImage = (ImageView) itemView.findViewById(R.id.blog_image);
+            //blogButton = (Button) itemView.findViewById(R.id.viewBlogButton);
         }
     }
 
@@ -73,7 +94,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
 
         // Inflate the custom layout
         View blogCardView = inflater.inflate(R.layout.blog_card_view, parent, false);
-
+        blogCardView.setOnClickListener(this.listener);
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(blogCardView);
         return viewHolder;
@@ -90,8 +111,14 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         TextView textView = viewHolder.blogTitle;
         textView.setText(blogObject.getBlogTitle());
         TextView textView2 = viewHolder.blogContent;
+        String str = blogObject.getBlogText().substring(0,30);
+        textView2.setText(str+"...");
+        //Button b = viewHolder.blogButton;
+
         textView2.setText(blogObject.getBlogText());
-        ImageView img= viewHolder.blogImage;
+        ImageView img= (ImageView) viewHolder.blogImage;
+
+        img.setImageResource(imgs.get(position));
         try{
             Log.i("TAG", "coming here");
 //            byte array, int, length
