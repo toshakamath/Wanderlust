@@ -204,6 +204,8 @@ public class AddNewPostFragment extends Fragment {
                                             locationLatLng.longitude, 0, new ArrayList<String>(), uri.toString());
 
                                     db.collection("blog_table").document(blogId.toString()).set(blogObject);
+                                    Intent i = new Intent(getContext(), MainActivity.class);
+                                    startActivity(i);
 
                                 } else {
                                     // Task failed with an exception

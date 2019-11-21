@@ -27,7 +27,7 @@ public class Register extends AppCompatActivity {
     Button cancel, register, login;
     EditText name, email, password;
     Context parentThis = this;
-    public static final String EXTRA_MESSAGE = "com.example.lab1.MESSAGE";
+    public static final String EXTRA_MESSAGE = "com.example.wanderlust.MESSAGE";
     private FirebaseFirestore db;
 
     @Override

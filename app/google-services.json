@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "206474799497-hv2omsquv51mrqiq23747ds15ritkeii.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wanderlust",
+            "certificate_hash": "d43a68b949b3b70f9a12e0ae69b8089285565995"
+          }
+        },
+        {
           "client_id": "206474799497-0ficsuioc1soq9j21e8jljfsrmp2t14g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -36,7 +44,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "206474799497-cm7j4imiarahqa7dkpln8irouv3g0qm8.apps.googleusercontent.com",
+              "client_id": "206474799497-9qicql33pjdk6kp8jqle1re0j71ag6oe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
