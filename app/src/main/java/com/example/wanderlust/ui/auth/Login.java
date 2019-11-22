@@ -127,9 +127,6 @@ public class Login extends AppCompatActivity {
                                         }
                                     }
                                 }
-                                else {
-                                    Toast.makeText(parentThis, "User " + email.getText() + " does not exist, please register.", Toast.LENGTH_LONG).show();
-                                }
 
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());

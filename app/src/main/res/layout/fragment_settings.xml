@@ -1,110 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/settingsFragment"
-    android:padding="1dp">
-    
-    <LinearLayout
+    android:fillViewport="true">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/graylight"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="#FFAB40"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="15dp"
-            android:text="User Details"
-            android:textStyle="bold"
-            android:textSize="25dp"/>
-
-        <TextView
-            android:id="@+id/accName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:id="@+id/accEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="italic"
-            android:layout_marginLeft="10dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Password Management"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Change Password?"
-            android:textSize="15sp"
-            android:textStyle="normal"/>
+        android:layout_height="251dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="251dp"
+            android:background="@drawable/gradientbackground"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="45dp"
+                android:src="@drawable/circle_boy5" />
+
+            <TextView
+                android:id="@+id/accName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:textColor="#fff"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="45dp">
+        <LinearLayout
             android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_email_black_24dp"/>
+            <TextView
+                android:id="@+id/accEmail"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_phone_android_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="+266 225 225"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!--        <LinearLayout-->
+<!--            android:layout_marginTop="25dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <ImageView-->
+<!--                android:layout_width="36dp"-->
+<!--                android:layout_height="36dp"-->
+<!--                android:src="@drawable/ic_group_add_black_24dp"/>-->
+<!--            <TextView-->
+<!--                android:textStyle="bold"-->
+
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="20dp"-->
+<!--                android:text="Add to group"/>-->
+<!--        </LinearLayout>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
             android:gravity="center">
 
-            <EditText
-                android:id="@+id/newPassword"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="Enter New Password"
-                android:textSize="15sp"
-                android:inputType="textPassword"/>
+                android:text="Password Management"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/updatePassword"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="15dp"
-                android:text="Update Password"/>
+                android:layout_marginTop="10dp"
+                android:text="Change Password?"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/newPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:hint="Enter New Password"
+                    android:textSize="15sp"
+                    android:inputType="textPassword"/>
+
+                <Button
+                    android:id="@+id/updatePassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Update Password"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
+<!--        <LinearLayout-->
+<!--            android:layout_marginTop="25dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <ImageView-->
+<!--                android:layout_width="36dp"-->
+<!--                android:layout_height="36dp"-->
+<!--                android:src="@drawable/ic_forum_black_24dp"/>-->
+<!--            <TextView-->
+<!--                android:textStyle="bold"-->
+
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="20dp"-->
+<!--                android:text="Show all comments"/>-->
+<!--        </LinearLayout>-->
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/personalBlogs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Personal Blogs"
-            android:textStyle="bold"/>
-
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/personalBlogs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/buttonstyleithgradient"
+        android:text="Personal Blogs"
+        android:textColor="#fff" />
 
 </LinearLayout>
+</ScrollView>
